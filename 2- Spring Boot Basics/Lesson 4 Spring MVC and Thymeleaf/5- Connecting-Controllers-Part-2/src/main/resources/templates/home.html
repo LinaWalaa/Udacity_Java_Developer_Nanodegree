@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+</head>
+
+<body>
+
+<!--th:object makes reference to the class that we will use
+not the object name
+When th:object is used due to the Thymeleaf syntax the class
+name must be in camel case, otherwise the mapping does not take effect
+and the error is thrown anyway.-->
+
+<!--action="#" means stay on the page you are on-->
+    <form th:object="${messageForm}" th:action="@{/home}" action="#" method="post">
+
+        <!-- for connects with the id of the input element -->
+        <label for="newMessageText">Submit a new message: </label>
+
+        <!-- we can use the shortcut field name immediately instead of (dot syntax)
+             referencing the object/variable name first since this is a th:object -->
+        <!-- <input th:field="*{newMessage.text}" type="text"> -->
+        <input id="newMessageText" name="newMessageText" th:field="*{text}" type="text">
+
+        <input type="submit">
+    </form>
+
+    <h1 th:each="msg : ${greetings}"
+        th:text="${msg}"
+        th:unless="${msg.contains('goodbye')}"
+    >Hello, homepage!</h1>
+
+</body>
+
+</html>
