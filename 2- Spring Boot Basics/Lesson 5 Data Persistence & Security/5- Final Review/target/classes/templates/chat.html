@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+    <title>Chat Homepage</title>
+
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col">
+
+            <div class="form-group" style="margin-top: 0.5em;">
+                <label><a th:href="@{/logout}">Logout</a></label>
+            </div>
+
+            <br>
+
+            <form th:object="${chatForm}" class="row g-3" th:action="@{/chat}" method="post">
+
+<!--                <div class="col-md-6">-->
+<!--                    <label for="inputUsername" class="form-label">Username</label>-->
+<!--                    <input type="text" class="form-control" id="inputUsername" th:field="*{username}">-->
+<!--                </div>-->
+
+                <div class="col-md-6">
+                    <label for="inputMessageType" class="form-label">Message Type</label>
+                    <select id="inputMessageType" class="form-select" th:field="*{messageType}" >
+                        <option th:each="type: ${types}" th:selected="${type=='Say'}" th:text="${type}"
+                                th:value="${type}">Choose...</option>
+<!--                        <option>Say</option>-->
+<!--                        <option>Shout</option>-->
+<!--                        <option>Whisper</option>-->
+                    </select>
+                </div>
+
+                <div class="col-12">
+                    <label for="inputMessageText" class="form-label">Message Text </label>
+                    <textarea class="form-control" id="inputMessageText" aria-label="With textarea" th:field="*{messageBody}"></textarea>
+                </div>
+
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+
+            <br>
+
+            <div class="card" style="width: 18rem;" th:each="msg: ${chatList}" th:if="${msg}!=null">
+                <div class="card-body">
+                    <h5 class="card-title badge bg-secondary" th:text="${msg.username}">Card title</h5>
+                    <p class="card-text" th:text="${msg.messageBody}">Some quick example text</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
+
+</body>
+</html>
