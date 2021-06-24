@@ -41,11 +41,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin()
                 .defaultSuccessUrl("/chat", true);
 
-//        http.logout()
-//                .invalidateHttpSession(true)
-//                .logoutUrl("/logout")
+        http.logout()
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login");
 //                .permitAll()
-//                .logoutSuccessUrl("/login");
+//                .logoutSuccessUrl("/login?logout");
+
+//        http.csrf().disable();
     }
 
 
