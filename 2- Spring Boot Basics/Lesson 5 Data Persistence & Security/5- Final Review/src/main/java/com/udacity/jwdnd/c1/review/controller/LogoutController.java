@@ -12,7 +12,7 @@ public class LogoutController {
 
     @GetMapping()
     public String logout(){
-        SecurityContextHolder.getContext().setAuthentication(null);
+       // SecurityContextHolder.getContext().setAuthentication(null);
 //        return "logout";
         return "redirect:/login?logout";
     }
