@@ -17,6 +17,12 @@
                 <div id="error-msg" th:if="${param.error}" class="alert alert-danger">
                     Invalid username or password
                 </div>
+                
+                <!--            As can be seen in the video the param.logout we are
+                getting through the URL, so if the URL has the logout
+                parameter the message is displayed otherwise the
+                message does not appear. -->
+                
                 <div id="logout-msg" th:if="${param.logout}" class="alert alert-dark">
                     You have been logged out
                 </div>
